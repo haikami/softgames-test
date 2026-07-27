@@ -29,7 +29,7 @@ namespace Core.UI
             _featureMenu.OnReturnedToMenu += () => _menuRoot.SetActive(true);
         }
 
-        private void OnFeatureButtonClicked(FeatureDefinition feature)
+        private void OnFeatureButtonClicked(FeatureConfig feature)
         {
             _featureMenu.SelectFeature(feature).Forget();
         }

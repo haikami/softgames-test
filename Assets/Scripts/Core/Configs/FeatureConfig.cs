@@ -2,8 +2,7 @@
 
 namespace Core.Configs
 {
-    [CreateAssetMenu(menuName = "Features/Feature Definition")]
-    public class FeatureDefinition : ScriptableObject
+    public class FeatureConfig : ScriptableObject
     {
         [SerializeField] private string _displayName;
         [SerializeField] private SceneField _scene;

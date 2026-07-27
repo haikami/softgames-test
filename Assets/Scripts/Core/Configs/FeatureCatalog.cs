@@ -7,7 +7,7 @@ namespace Core.Configs
     [CreateAssetMenu(menuName = "Features/Feature Catalog")]
     public class FeatureCatalog : ScriptableObject, IFeatureCatalogService
     {
-        [SerializeField] private List<FeatureDefinition> _features;
-        public IReadOnlyList<FeatureDefinition> Features => _features;
+        [SerializeField] private List<FeatureConfig> _features;
+        public IReadOnlyList<FeatureConfig> Features => _features;
     }
 }

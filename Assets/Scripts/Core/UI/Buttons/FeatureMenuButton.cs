@@ -11,7 +11,7 @@ namespace Core.UI.Buttons
         [SerializeField] private Button _button;
         [SerializeField] private TMP_Text _label;
 
-        public void Init(FeatureDefinition feature, Action<FeatureDefinition> onClick)
+        public void Init(FeatureConfig feature, Action<FeatureConfig> onClick)
         {
             _label.text = feature.DisplayName;
             _button.onClick.AddListener(() => onClick(feature));

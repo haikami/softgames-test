@@ -10,13 +10,13 @@ namespace Core.Services
         private readonly ISceneLoaderService _sceneLoader;
         private bool _isTransitioning;
 
-        public FeatureDefinition CurrentFeature { get; private set; }
-        public event Action<FeatureDefinition> OnFeatureSelected;
+        public FeatureConfig CurrentFeature { get; private set; }
+        public event Action<FeatureConfig> OnFeatureSelected;
         public event Action OnReturnedToMenu;
 
         public FeatureMenuService(ISceneLoaderService sceneLoader) => _sceneLoader = sceneLoader;
 
-        public async UniTask SelectFeature(FeatureDefinition feature)
+        public async UniTask SelectFeature(FeatureConfig feature)
         {
             if (_isTransitioning || CurrentFeature != null) return;
             _isTransitioning = true;

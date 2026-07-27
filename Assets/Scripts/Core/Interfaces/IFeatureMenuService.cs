@@ -6,11 +6,11 @@ namespace Core.Interfaces
 {
     public interface IFeatureMenuService
     {
-        FeatureDefinition CurrentFeature { get; }
-        event Action<FeatureDefinition> OnFeatureSelected;
+        FeatureConfig CurrentFeature { get; }
+        event Action<FeatureConfig> OnFeatureSelected;
         event Action OnReturnedToMenu;
 
-        UniTask SelectFeature(FeatureDefinition feature);
+        UniTask SelectFeature(FeatureConfig feature);
         UniTask ReturnToMenu();
     }
 }

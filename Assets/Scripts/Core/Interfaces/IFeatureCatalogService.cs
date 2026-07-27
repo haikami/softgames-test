@@ -5,6 +5,6 @@ namespace Core.Interfaces
 {
     public interface IFeatureCatalogService
     {
-        IReadOnlyList<FeatureDefinition> Features { get; }
+        IReadOnlyList<FeatureConfig> Features { get; }
     }
 }

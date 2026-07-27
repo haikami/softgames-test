@@ -18,6 +18,7 @@ namespace Core
             ServiceLocator.Register<ISceneLoaderService>(sceneLoader);
             ServiceLocator.Register<IFeatureMenuService>(featureMenu);
             ServiceLocator.Register<IFeatureCatalogService>(_featureCatalog);
+            ServiceLocator.Register<IObjectPoolService>(new ObjectPoolService());
 
             await sceneLoader.LoadAdditive(_mainMenuScene.SceneName);
         }

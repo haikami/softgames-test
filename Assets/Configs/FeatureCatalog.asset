@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b9633e5d9214c888b201f799329f766, type: 3}
-  m_Name: Features
+  m_Name: FeatureCatalog
   m_EditorClassIdentifier: 
   _features:
-  - {fileID: 11400000, guid: a1f805829073b0f49ba70e4c09977c7f, type: 2}
+  - {fileID: 11400000, guid: c979f211d89467747b42c74336ae438e, type: 2}
