@@ -27,6 +27,7 @@ namespace Features.AceOfShadows.Animations
                     card.Rect.anchoredPosition =
                         u * u * start + 2f * u * t * middle + t * t * end;
                 }, 1f, preset.Duration)
+                .SetTarget(card.Rect)
                 .SetEase(preset.Ease)
                 .OnComplete(() => onComplete?.Invoke());
         }

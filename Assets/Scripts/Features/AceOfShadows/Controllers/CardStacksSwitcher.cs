@@ -1,10 +1,14 @@
 ﻿using System;
 using Features.AceOfShadows.Animations;
 using Features.AceOfShadows.Configs;
-using Features.AceOfShadows.Controllers;
+using UnityEngine;
 
-namespace Features.AceOfShadows.Services
+namespace Features.AceOfShadows.Controllers
 {
+    /// <summary>
+    /// Moves cards from one stack to the other on a given interval.
+    /// Triggers an event after last card reaches destination stack.
+    /// </summary>
     public class CardStacksSwitcher
     {
         public event Action OnSequenceCompleted;
@@ -33,7 +37,11 @@ namespace Features.AceOfShadows.Services
             if (IsComplete) return;
 
             var card = _source.PopTop();
-            if (card == null) return; // this should only happen if there is a null card in the stack
+            if (card == null) 
+            {
+                Debug.LogError("This should only happen if there is a null card in the stack.");
+                return;  
+            }
 
             var preset = PickPreset();
             var animator = _animatorFactory.Get(preset.Style);
@@ -45,7 +53,10 @@ namespace Features.AceOfShadows.Services
             animator.Play(card, _destination.StackTopLocalPosition, preset, () =>
             {
                 _destination.PushTop(card);
-                if (IsComplete) OnSequenceCompleted?.Invoke();
+                if (IsComplete)
+                {
+                    OnSequenceCompleted?.Invoke();
+                }
             });
         }
 

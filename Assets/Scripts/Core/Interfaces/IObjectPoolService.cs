@@ -8,6 +8,5 @@ namespace Core.Interfaces
         T Get<T>(Transform parent = null) where T : Component;
         void Return<T>(T instance) where T : Component;
         void Clear<T>() where T : Component;
-        void Clear<T>(T prefab) where T : Component;
     }
 }

@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Interfaces;
 using Features.AceOfShadows.UI;
 using UnityEngine;
 
 namespace Features.AceOfShadows.Controllers
 {
+    /// <summary>
+    /// Allows pushing and popping from a stack of cards.
+    /// Triggers events when cards are added/removed
+    /// </summary>
     public class CardStackController
     {
         public RectTransform ContentRoot { get; }
@@ -21,6 +26,16 @@ namespace Features.AceOfShadows.Controllers
             _cardsOffset = cardsOffset;
             ContentRoot = contentRoot;
         }
+        
+        public void AddCards(IObjectPoolService pool, int numCards)
+        {
+            for (var i = 0; i < numCards; i++)
+            {
+                var card = pool.Get<CardView>();
+                PushTop(card);
+            }
+        }
+
 
         public CardView PopTop()
         {

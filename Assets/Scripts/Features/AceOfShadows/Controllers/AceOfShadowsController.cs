@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-using Core;
+﻿using Core;
 using Core.Interfaces;
 using DG.Tweening;
 using Features.AceOfShadows.Animations;
 using Features.AceOfShadows.Configs;
-using Features.AceOfShadows.Controllers;
-using Features.AceOfShadows.Services;
 using Features.AceOfShadows.UI;
 using UnityEngine;
 
-namespace Features.AceOfShadows
+namespace Features.AceOfShadows.Controllers
 {
     public class AceOfShadowsController : MonoBehaviour
     {
@@ -27,39 +24,34 @@ namespace Features.AceOfShadows
 
         private void Start()
         {
-            _pool = ServiceLocator.Get<IObjectPoolService>();
 
             if (ServiceLocator.Get<IFeatureMenuService>().CurrentFeature is not AceOfShadowsConfig config)
             {
-                Debug.LogError("No config found for feature");
+                Debug.LogError("Current feature is not setup properly: No suitable config found for feature");
                 //TODO: handle error better
                 return;
             }
-
             _config = config;
+            SetupStacks();
+        }
+
+        private void SetupStacks()
+        {
+            _pool = ServiceLocator.Get<IObjectPoolService>();
             _pool.Register(_cardPrefab, _config.TotalCardCount);
 
             _source = new CardStackController( _sourceStackView.ContentRoot, _config.CardStackOffset);
-            _destination = new CardStackController( _destinationStackView.ContentRoot, _config.CardStackOffset);
             _sourceStackView.Bind(_source);
+            _source.AddCards(_pool, _config.TotalCardCount);
+            
+            _destination = new CardStackController( _destinationStackView.ContentRoot, _config.CardStackOffset);
             _destinationStackView.Bind(_destination);
-
-            DealInitialCards();
 
             _stacksSwitcher = new CardStacksSwitcher(_source, _destination, _config, new CardMoveAnimatorFactory());
             _stacksSwitcher.OnSequenceCompleted += ShowBanner;
         }
 
         private void ShowBanner() => _banner?.SetActive(true);
-
-        private void DealInitialCards()
-        {
-            for (var i = 0; i < _config.TotalCardCount; i++)
-            {
-                var card = _pool.Get<CardView>();
-                _source.PushTop(card);
-            }
-        }
 
         private void Update()
         {
@@ -68,14 +60,17 @@ namespace Features.AceOfShadows
             _timer += Time.deltaTime;
             if (_timer >= _config.MoveInterval)
             {
-                _timer = 0f;
+                _timer -= _config.MoveInterval;
                 _stacksSwitcher.MoveNextCard();
             }
         }
 
         private void OnDestroy()
         {
-            _pool.Clear<CardView>();
+            if (_pool != null)
+            {
+                _pool.Clear<CardView>();
+            }
             DOTween.Kill(this); // safety net for any pending tweens
         }
     }

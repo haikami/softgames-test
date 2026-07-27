@@ -79,8 +79,5 @@ namespace Core.Services
             _pools.Remove(type);
             _prefabByType.Remove(type);
         }
-
-        public void Clear<T>(T prefab) where T : Component
-            => Clear<T>();
     }
 }
