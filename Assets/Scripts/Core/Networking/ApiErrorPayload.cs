@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace Core.Networking
 {
+    /// <summary>
+    /// Parsed errors
+    /// </summary>
     public class ApiErrorPayload
     {
         [JsonProperty("statusCode")] public int StatusCode;

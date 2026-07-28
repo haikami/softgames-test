@@ -175,8 +175,8 @@ MonoBehaviour:
   _mainMenuScene:
     _sceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
     _sceneName: MainMenu
+  _persistentCanvas: {fileID: 780104033}
   _loadingView: {fileID: 1542344756}
-  _fpsCounterView: {fileID: 1554345461}
 --- !u!1 &667435934
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 780104032}
   - component: {fileID: 780104031}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: PersistentCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,17 +456,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 364880861497794175, guid: 3abd599bce178a94a96841f403a77931, type: 3}
   m_PrefabInstance: {fileID: 2544352020468925982}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1554345461 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4525971500125446114, guid: 3abd599bce178a94a96841f403a77931, type: 3}
-  m_PrefabInstance: {fileID: 2544352020468925982}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcd4574af189430e964bf7313f1d158e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2544352020468925982
 PrefabInstance:
   m_ObjectHideFlags: 0

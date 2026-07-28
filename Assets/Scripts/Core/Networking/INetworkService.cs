@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Core.Networking
 {
+    /// <summary>
+    /// Basic methods needed for this task
+    /// </summary>
     public interface INetworkService
     {
         UniTask<Result<T>> GetJson<T>(string url, string owner, NetworkRequestOptions options = null, CancellationToken cancellationToken = default);
