@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: Magic Words
   _scene:
-    _sceneAsset: {fileID: 0}
-    _sceneName: 
+    _sceneAsset: {fileID: 102900000, guid: 1d5d2c2c50e9f2b45858d75ba6d72e8b, type: 3}
+    _sceneName: Feature_MagicWords
   _endpointUrl: https://private-624120-softgamesassignment.apiary-mock.com/v3/magicwords
   _avatarGraceSeconds: 1.5
   _cadenceSeconds: 0.6
   _initialDialogBubbles: 8
-  _emojiConfig: {fileID: 0}
+  _emojiConfig: {fileID: 11400000, guid: 021561908d7d78941987edbb3a8491bc, type: 2}
   _localSourceOverride: {fileID: 0}

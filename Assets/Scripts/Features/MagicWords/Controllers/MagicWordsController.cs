@@ -103,6 +103,7 @@ namespace Features.MagicWords.Controllers
             var view = _pool.Get<DialogueLineView>(parent: _contentContainer);
             view.Setup(line); 
             _activeLineViews.Add(view);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_contentContainer);
             _scrollRect.verticalNormalizedPosition = 0f;
         }
 

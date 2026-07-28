@@ -13,17 +13,14 @@ namespace Features.MagicWords.UI
         [SerializeField] private RectTransform _avatarSlot;
         [SerializeField] private RectTransform _bubbleSlot;
         [SerializeField] private AvatarView _avatarView;
-        [SerializeField] private TMP_Text _nameLabel;
         [SerializeField] private TMP_Text _textLabel;
-
-        public AvatarView AvatarView => _avatarView;
-
+        
         public void Setup(DialogueEntryModel line)
         {
-            _nameLabel.text = line.SpeakerName;
             _textLabel.text = line.FormattedText;
             SetSide(line.Avatar?.Position ?? AvatarPosition.Left);
             _avatarView.Bind(line.Avatar);
+            _avatarView.SetupName(line.SpeakerName);
         }
 
         private void SetSide(AvatarPosition position)
