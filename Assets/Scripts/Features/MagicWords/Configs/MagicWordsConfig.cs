@@ -11,7 +11,8 @@ namespace Features.MagicWords.Configs
 
         [Header("Timing")]
         [SerializeField] private float _avatarGraceSeconds = 1.5f;
-        [SerializeField] private float _cadenceSeconds = 0.6f;
+        [Tooltip("")]
+        [SerializeField] private float _timeBetweenDialogueLines = 0.6f;
 
         [Header("Pooling")]
         [SerializeField] private int _initialDialogBubbles = 8;
@@ -25,7 +26,7 @@ namespace Features.MagicWords.Configs
 
         public string EndpointUrl => _endpointUrl;
         public float AvatarGraceSeconds => _avatarGraceSeconds;
-        public float CadenceSeconds => _cadenceSeconds;
+        public float TimeBetweenDialogueLines => _timeBetweenDialogueLines;
         public int InitialDialogBubbles => _initialDialogBubbles;
         public EmojiConfig EmojiConfig => _emojiConfig;
         public MagicWordsLocalConfig LocalSourceOverride => _localSourceOverride;

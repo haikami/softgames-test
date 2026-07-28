@@ -53,7 +53,7 @@ namespace Features.MagicWords.Controllers
 
             _config = config;
             _avatarsLoader = new AvatarsTextureLoader(_network, nameof(MagicWordsController));
-            _dialogueDisplayer = new CadenceDialogueDisplayer(_config.CadenceSeconds);
+            _dialogueDisplayer = new CadenceDialogueDisplayer(_config.TimeBetweenDialogueLines);
             _pool.Register(_linePrefab, _config.InitialDialogBubbles);
 
             RunFlow().Forget();

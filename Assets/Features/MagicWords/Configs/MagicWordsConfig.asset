@@ -18,7 +18,7 @@ MonoBehaviour:
     _sceneName: Feature_MagicWords
   _endpointUrl: https://private-624120-softgamesassignment.apiary-mock.com/v3/magicwords
   _avatarGraceSeconds: 1.5
-  _cadenceSeconds: 0.6
+  _timeBetweenDialogueLines: 2
   _initialDialogBubbles: 8
   _emojiConfig: {fileID: 11400000, guid: 021561908d7d78941987edbb3a8491bc, type: 2}
   _localSourceOverride: {fileID: 0}
