@@ -2,10 +2,17 @@
 {
     public class NetworkRequestOptions
     {
-        public int MaxRetries { get; set; } = 2;
-        public float RetryDelaySeconds { get; set; } = 1f;
-        public int TimeoutSeconds { get; set; } = 10;
+        public int MaxRetries { get; }
+        public float RetryDelaySeconds { get; }
+        public int TimeoutSeconds { get; }
 
-        public static NetworkRequestOptions Default => new();
+        public NetworkRequestOptions(int maxRetries = 2, float retryDelaySeconds = 1f, int timeoutSeconds = 10)
+        {
+            MaxRetries = maxRetries;
+            RetryDelaySeconds = retryDelaySeconds;
+            TimeoutSeconds = timeoutSeconds;
+        }
+
+        public static readonly NetworkRequestOptions Default = new();
     }
 }
