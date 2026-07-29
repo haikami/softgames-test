@@ -2,6 +2,11 @@
 
 ## Task 2: Magic words
 
+
+- Emojis handling
+I mapped all the emojis in a spreadsheet so they match with the ids returned by the endpoint, this way we only need to replace {emojiID} in texts directly by the standard <sprite name="emojiID"> accepted by textmeshpro 
+
+
 "position" is interpreted as the position of the avatar in the dialogue.
 
 Edge case handling:

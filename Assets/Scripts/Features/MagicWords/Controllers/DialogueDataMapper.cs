@@ -50,7 +50,7 @@ namespace Features.MagicWords.Controllers
                 //if it already exists, then keep the info of the one already in the dictionary
                 if (!map.TryAdd(name, new AvatarModel(name, raw.Url, ParsePosition(raw.Position))))
                 {
-                    Debug.LogError($"Duplicate avatar data with same name: {name} {raw.Position} {raw.Url} skipping entry");
+                    Debug.LogWarning($"Duplicate avatar data with same name: {name} {raw.Position} {raw.Url} skipping entry");
                 }
             }
             
