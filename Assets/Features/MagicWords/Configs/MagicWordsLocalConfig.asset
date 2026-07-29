@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c9dac234da42a3baba28a2f66c80ad, type: 3}
+  m_Name: MagicWordsLocalConfig
+  m_EditorClassIdentifier: 
+  _dialogue:
+  - Name: Dev1
+    Text: Seems that local test is working {win}
+  - Name: Dev2
+    Text: Where is my avatar?
+  - Name: Hayk
+    Text: You should see default for failed download.
+  - Name: Dev3
+    Text: My avatar is not loading
+  - Name: Hayk
+    Text: You should see default if you wait after timeout
+  _avatars:
+  - Name: Hayk
+    Url: https://api.dicebear.com/9.x/personas/png?body=squared&clothingColor=6dbb58&eyes=open&hair=buzzcut&hairColor=6c4545&mouth=smirk&nose=smallRound&skinColor=e5a07e
+    Position: left
+  - Name: Dev1
+    Url: https://api.dicebear.com/9.x/personas/png?body=squared&clothingColor=f55d81&eyes=happy&hair=extraLong&hairColor=f29c65&mouth=smile&nose=smallRound&skinColor=e5a07e
+    Position: right
+  - Name: Dev2
+    Url: https://api.dicebear.com/5.x/personas/
+    Position: right
+  - Name: Dev3
+    Url: https://api.dicebear.com:81/blub
+    Position: right
+  _fakeFetchDelay: 0.5

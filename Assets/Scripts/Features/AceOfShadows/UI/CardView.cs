@@ -13,15 +13,18 @@ namespace Features.AceOfShadows.UI
         public RectTransform Rect => _rect;
 
         public void SetRectParent(RectTransform parent) => Rect.SetParent(parent, false);
-        public void ClearRectParent() => SetRectParent(null);
 
         public void OnSpawned()
         {
             gameObject.SetActive(true);
-            _rect.localRotation = Quaternion.identity;
-            _rect.localScale = Vector3.one;
         }
 
-        public void OnReturned() => gameObject.SetActive(false);
+        public void OnReturned()
+        {
+            _rect.localRotation = Quaternion.identity;
+            _rect.localScale = Vector3.one;
+            _rect.anchoredPosition = Vector2.zero;
+            gameObject.SetActive(false);
+        }
     }
 }

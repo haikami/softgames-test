@@ -18,6 +18,7 @@ namespace Core
         //Used for UI elements that must always go on top of everything else
         [SerializeField] private Canvas _persistentCanvas;
         [SerializeField] private LoadingView _loadingView;
+        [SerializeField] private TopBarView _topBarView;
         
         private async void Start()
         {
@@ -34,10 +35,12 @@ namespace Core
         private async UniTask Setup()
         {
             _loadingView.Show();
-            
+            _topBarView.SetButtonsVisibility(false,false, false);
             //Setup and register prefabs
             DontDestroyOnLoad(_persistentCanvas.gameObject);
             ServiceLocator.Register<ILoadingScreen>(_loadingView);
+            ServiceLocator.Register<ITopBarView>(_topBarView);
+            
 
             //Network
             var webRequester = new UnityWebRequester();

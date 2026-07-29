@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Networking;
@@ -20,15 +21,24 @@ namespace Core.Networking
             {
                 return RawResponse.Cancelled();
             }
+            catch (UnityWebRequestException ex)
+            {
+                // ToUniTask throws for anything != Success, including a "successful"
+                // HTTP error response (400/500 etc). ProtocolError means a real response
+                // reached us — extract status + body instead of treating it as unreachable.
+                if (ex.Result == UnityWebRequest.Result.ProtocolError)
+                {
+                    var bytes = string.IsNullOrEmpty(ex.Text)
+                        ? Array.Empty<byte>()
+                        : Encoding.UTF8.GetBytes(ex.Text);
+                    return RawResponse.FromHttp(ex.ResponseCode, bytes);
+                }
 
-            // ProtocolError still means we got a real HTTP response (e.g. 400/500) —
-            // that's a valid "transport succeeded, application-level failure" case,
-            // distinct from ConnectionError (no response reached us at all).
-            var gotResponse = request.result is UnityWebRequest.Result.Success
-                or UnityWebRequest.Result.ProtocolError;
+                // ConnectionError / DataProcessingError: no usable response at all.
+                return RawResponse.TransportFailure(ex.Error);
+            }
 
-            return gotResponse ? RawResponse.FromHttp((long)request.responseCode, request.downloadHandler.data)
-            : RawResponse.TransportFailure(request.error);
+            return RawResponse.FromHttp((long)request.responseCode, request.downloadHandler.data);
         }
     }
 }

@@ -18,13 +18,15 @@ namespace Features.MagicWords.Configs
         [SerializeField] private int _initialDialogBubbles = 8;
 
         [Header("Local Testing Override")]
-        [Tooltip("If set, skips the network call entirely and uses this data instead. Leave empty for real runs.")]
-        [SerializeField] private MagicWordsLocalConfig _localSourceOverride;
+        [SerializeField] private MagicWordsLocalConfig _localConfigOverride;
+
 
         public string EndpointUrl => _endpointUrl;
         public float AvatarGraceSeconds => _avatarGraceSeconds;
         public float TimeBetweenDialogueLines => _timeBetweenDialogueLines;
         public int InitialDialogBubbles => _initialDialogBubbles;
-        public MagicWordsLocalConfig LocalSourceOverride => _localSourceOverride;
+        public MagicWordsLocalConfig LocalConfigOverride => _localConfigOverride;
+        
+        public bool OverrideWithLocalConfigAvailable => _localConfigOverride != null;
     }
 }

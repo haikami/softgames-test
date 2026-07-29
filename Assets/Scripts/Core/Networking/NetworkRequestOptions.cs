@@ -6,7 +6,7 @@
         public float RetryDelaySeconds { get; }
         public int TimeoutSeconds { get; }
 
-        public NetworkRequestOptions(int maxRetries = 2, float retryDelaySeconds = 1f, int timeoutSeconds = 10)
+        public NetworkRequestOptions(int maxRetries = 2, float retryDelaySeconds = 1f, int timeoutSeconds = 5)
         {
             MaxRetries = maxRetries;
             RetryDelaySeconds = retryDelaySeconds;

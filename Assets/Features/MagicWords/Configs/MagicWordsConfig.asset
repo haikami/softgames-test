@@ -20,4 +20,5 @@ MonoBehaviour:
   _avatarGraceSeconds: 0.5
   _timeBetweenDialogueLines: 2
   _initialDialogBubbles: 8
-  _localSourceOverride: {fileID: 0}
+  _localConfigOverride: {fileID: 11400000, guid: 7207fd16654b16442adea20e9f75aff8, type: 2}
+  _overrideWithLocalConfig: 0

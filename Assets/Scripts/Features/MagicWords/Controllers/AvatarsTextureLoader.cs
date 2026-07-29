@@ -4,6 +4,7 @@ using Core.Networking;
 using Cysharp.Threading.Tasks;
 using Features.MagicWords.Enums;
 using Features.MagicWords.Models;
+using UnityEngine;
 
 namespace Features.MagicWords.Controllers
 {
@@ -51,8 +52,15 @@ namespace Features.MagicWords.Controllers
         private async UniTask LoadOne(AvatarModel avatar)
         {
             var result = await _network.GetTexture(avatar.ImageUrl, _owner);
-            if (result.IsSuccess) avatar.SetTexture(result.Value);
-            else avatar.SetFailed();
+            if (result.IsSuccess)
+            {
+                avatar.SetTexture(result.Value);
+            }
+            else
+            {
+                Debug.LogWarning($"Texture could not be loaded for Avatar {avatar.Name}, setting default placeholder: {result.Error.Message}");
+                avatar.SetFailed();
+            }
         }
 
         public void CancelAll() => _network.CancelAll(_owner);

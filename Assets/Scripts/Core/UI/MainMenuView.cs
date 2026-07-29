@@ -25,8 +25,16 @@ namespace Core.UI
                 button.Init(feature, OnFeatureButtonClicked);
             }
 
-            _featureMenu.OnFeatureSelected += _ => _menuRoot.SetActive(false);
-            _featureMenu.OnReturnedToMenu += () => _menuRoot.SetActive(true);
+            _featureMenu.OnFeatureSelected += _ =>
+            {
+                _menuRoot.SetActive(false);
+            };
+            _featureMenu.OnReturnedToMenu += () =>
+            {
+                var topBarView = ServiceLocator.Get<ITopBarView>();
+                topBarView.SetButtonsVisibility();
+                _menuRoot.SetActive(true);
+            };
         }
 
         private void OnFeatureButtonClicked(FeatureConfig feature)

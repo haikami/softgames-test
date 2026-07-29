@@ -1,5 +1,6 @@
 ﻿using Core;
 using Core.Interfaces;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Features.AceOfShadows.Animations;
 using Features.AceOfShadows.Configs;
@@ -13,13 +14,20 @@ namespace Features.AceOfShadows.Controllers
         [SerializeField] private CardView _cardPrefab;
         [SerializeField] private CardStackView _sourceStackView;
         [SerializeField] private CardStackView _destinationStackView;
-        [SerializeField] private GameObject _banner;
-
+        [SerializeField] private GameObject _sequenceCompleteView;
+        
+        private const string FasterCheatMessage = "X1";
+        private const string SlowerCheatMessage = "X3";
+        
         private IObjectPoolService _pool;
+        private ITopBarView _topBarView;
+        
         private CardStackController _source;
         private CardStackController _destination;
         private CardStacksSwitcher _stacksSwitcher;
         private AceOfShadowsConfig _config;
+        private Vector3 _sourcePosition;
+        private Vector3 _destinationPosition;
         private float _timer;
 
         private void Start()
@@ -28,11 +36,33 @@ namespace Features.AceOfShadows.Controllers
             if (ServiceLocator.Get<IFeatureMenuService>().CurrentFeature is not AceOfShadowsConfig config)
             {
                 Debug.LogError("Current feature is not setup properly: No suitable config found for feature");
-                //TODO: handle error better
+                ServiceLocator.Get<IFeatureMenuService>().ReturnToMenu().Forget();
                 return;
             }
+            
             _config = config;
+            SetupTopBar();
             SetupStacks();
+        }
+
+        private void SetupTopBar()
+        {
+            _topBarView = ServiceLocator.Get<ITopBarView>();
+            _topBarView.SetButtonsVisibility(true, true, true);
+            _topBarView.OnResetButtonPressed += Reset;
+            _topBarView.SetupCheatButton(FasterCheatMessage, GoFasterCheatClicked);
+        }
+        
+        private void GoFasterCheatClicked()
+        {
+            Time.timeScale = 3f;
+            _topBarView?.SetupCheatButton(SlowerCheatMessage, GoSlowerCheatClicked);
+        }
+
+        private void GoSlowerCheatClicked()
+        {
+            Time.timeScale = 1f;
+            _topBarView?.SetupCheatButton(FasterCheatMessage, GoFasterCheatClicked);
         }
 
         private void SetupStacks()
@@ -43,15 +73,17 @@ namespace Features.AceOfShadows.Controllers
             _source = new CardStackController( _sourceStackView.ContentRoot, _config.CardStackOffset);
             _sourceStackView.Bind(_source);
             _source.AddCards(_pool, _config.TotalCardCount);
+            _sourcePosition = _sourceStackView.transform.position;
             
             _destination = new CardStackController( _destinationStackView.ContentRoot, _config.CardStackOffset);
             _destinationStackView.Bind(_destination);
-
+            _destinationPosition = _destinationStackView.transform.position;
+            
             _stacksSwitcher = new CardStacksSwitcher(_source, _destination, _config, new CardMoveAnimatorFactory());
-            _stacksSwitcher.OnSequenceCompleted += ShowBanner;
+            _stacksSwitcher.OnSequenceCompleted += ShowSequenceCompleteView;
         }
 
-        private void ShowBanner() => _banner?.SetActive(true);
+        private void ShowSequenceCompleteView() => _sequenceCompleteView?.SetActive(true);
 
         private void Update()
         {
@@ -67,11 +99,35 @@ namespace Features.AceOfShadows.Controllers
 
         private void OnDestroy()
         {
-            if (_pool != null)
+            _pool?.Clear<CardView>();
+
+            if (_topBarView != null)
             {
-                _pool.Clear<CardView>();
+                _topBarView.OnResetButtonPressed -= Reset;
+                _topBarView.ClearCheatButton();
             }
+            
+            Time.timeScale = 1f;
             DOTween.Kill(this); // safety net for any pending tweens
+        }
+
+        private void Reset()
+        {
+            Time.timeScale = 1f;
+            
+            _timer = 0f;
+            _source.Clear(_pool);
+            _destination.Clear(_pool);
+            _stacksSwitcher.ClearOngoingFlyingCards(_pool);
+            
+            _source.AddCards(_pool, _config.TotalCardCount);
+            
+            _sourceStackView.transform.position = _sourcePosition;
+            _destinationStackView.transform.position = _destinationPosition;
+            
+            _topBarView?.SetupCheatButton(FasterCheatMessage, GoFasterCheatClicked);
+            
+            _sequenceCompleteView?.SetActive(false);
         }
     }
 }

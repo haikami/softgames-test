@@ -36,6 +36,14 @@ namespace Features.AceOfShadows.Controllers
             }
         }
 
+        public void Clear(IObjectPoolService pool)
+        {
+            while (_cards.Count > 0)
+            {
+                pool.Return(PopTop());
+            }
+        }
+
 
         public CardView PopTop()
         {

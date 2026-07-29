@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using Core.Interfaces;
+using DG.Tweening;
 using Features.AceOfShadows.Animations;
 using Features.AceOfShadows.Configs;
-using UnityEngine;
+using Features.AceOfShadows.UI;
 
 namespace Features.AceOfShadows.Controllers
 {
@@ -17,8 +20,9 @@ namespace Features.AceOfShadows.Controllers
         private readonly CardStackController _destination;
         private readonly AceOfShadowsConfig _config;
         private readonly CardMoveAnimatorFactory _animatorFactory;
+        private readonly List<CardView> _inFlightCards = new();
 
-        public bool IsComplete => _source.Count == 0;
+        public bool IsComplete => _source.Count == 0 && _inFlightCards.Count == 0;
 
         public CardStacksSwitcher(
             CardStackController source,
@@ -34,30 +38,39 @@ namespace Features.AceOfShadows.Controllers
 
         public void MoveNextCard()
         {
-            if (IsComplete) return;
+            if (_source.Count == 0) return;
 
             var card = _source.PopTop();
-            if (card == null) 
-            {
-                Debug.LogError("This should only happen if there is a null card in the stack.");
-                return;  
-            }
+            if (card == null) return;
+
+            _inFlightCards.Add(card);
 
             var preset = PickPreset();
             var animator = _animatorFactory.Get(preset.Style);
-            
+
             var worldPos = card.Rect.position;
             card.SetRectParent(_destination.ContentRoot);
             card.Rect.position = worldPos;
 
             animator.Play(card, _destination.StackTopLocalPosition, preset, () =>
             {
+                _inFlightCards.Remove(card);
                 _destination.PushTop(card);
-                if (IsComplete)
-                {
-                    OnSequenceCompleted?.Invoke();
-                }
+                if (IsComplete) OnSequenceCompleted?.Invoke();
             });
+        }
+
+        /// Kills any ongoing tweens and return flying cards to the pool.
+        public void ClearOngoingFlyingCards(IObjectPoolService pool)
+        {
+            var cards = new List<CardView>(_inFlightCards);
+            foreach (var card in cards)
+            {
+                DOTween.Kill(card.Rect);
+                pool.Return(card);
+            }
+
+            _inFlightCards.Clear(); ;
         }
 
         private CardMoveAnimationPreset PickPreset()

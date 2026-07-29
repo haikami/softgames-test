@@ -8,7 +8,9 @@ public class MagicWordsLocalConfig : ScriptableObject, IMagicWordsData
 {
     [SerializeField] private List<DialogueLine> _dialogue;
     [SerializeField] private List<AvatarInfo> _avatars;
+    [SerializeField] private float _fakeFetchDelay;
 
     public List<DialogueLine> Dialogue => _dialogue;
     public List<AvatarInfo> Avatars => _avatars;
+    public float FakeFetchDelay => _fakeFetchDelay;
 }
