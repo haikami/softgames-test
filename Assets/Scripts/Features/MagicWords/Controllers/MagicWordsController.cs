@@ -75,7 +75,7 @@ namespace Features.MagicWords.Controllers
             }
 
             //Map and purge the data into more useful structure
-            var mapper = new DialogueDataMapper(_config.EmojiConfig.MapEntries());
+            var mapper = new DialogueDataMapper();
             var model = mapper.Map(sourceResult.Value);
 
             //Give some seconds to load avatars

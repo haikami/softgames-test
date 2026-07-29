@@ -10,15 +10,12 @@ namespace Features.MagicWords.Configs
         [SerializeField] private string _endpointUrl;
 
         [Header("Timing")]
+        [Tooltip("Time to wait after fetching dialogues so avatars can load")]
         [SerializeField] private float _avatarGraceSeconds = 1.5f;
-        [Tooltip("")]
         [SerializeField] private float _timeBetweenDialogueLines = 0.6f;
 
         [Header("Pooling")]
         [SerializeField] private int _initialDialogBubbles = 8;
-
-        [Header("Dependencies")]
-        [SerializeField] private EmojiConfig _emojiConfig;
 
         [Header("Local Testing Override")]
         [Tooltip("If set, skips the network call entirely and uses this data instead. Leave empty for real runs.")]
@@ -28,7 +25,6 @@ namespace Features.MagicWords.Configs
         public float AvatarGraceSeconds => _avatarGraceSeconds;
         public float TimeBetweenDialogueLines => _timeBetweenDialogueLines;
         public int InitialDialogBubbles => _initialDialogBubbles;
-        public EmojiConfig EmojiConfig => _emojiConfig;
         public MagicWordsLocalConfig LocalSourceOverride => _localSourceOverride;
     }
 }

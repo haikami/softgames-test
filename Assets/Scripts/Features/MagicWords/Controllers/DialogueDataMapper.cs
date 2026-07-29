@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using Core.Utils;
 using Features.MagicWords.Enums;
 using Features.MagicWords.Interfaces;
 using Features.MagicWords.Models;
@@ -13,23 +13,6 @@ namespace Features.MagicWords.Controllers
     /// </summary>
     public class DialogueDataMapper : IDialogueDataMapper
     {
-        private static readonly Regex TokenPattern = new(@"\{(\w+)\}", RegexOptions.Compiled);
-        
-        private readonly IReadOnlyDictionary<string, string> _map;
-
-        private string ReplaceEmojis(string rawText)
-        {
-            if (string.IsNullOrEmpty(rawText)) return rawText;
-            
-            var result = TokenPattern.Replace(rawText, match =>
-                _map.TryGetValue(match.Groups[1].Value, out var emoji) ? emoji : match.Value);
-
-            
-            return result;
-        }
-        
-        public DialogueDataMapper(IReadOnlyDictionary<string, string> emojiMap) => _map = emojiMap;
-
         public DialogueDataModel Map(IMagicWordsData data)
         {
             var avatarsByName = BuildAvatarDictionary(data);
@@ -38,7 +21,7 @@ namespace Features.MagicWords.Controllers
             foreach (var line in data.Dialogue)
             {
                 avatarsByName.TryGetValue(line.Name, out var avatar);
-                lines.Add(new DialogueEntryModel(line.Name, ReplaceEmojis(line.Text), avatar));
+                lines.Add(new DialogueEntryModel(line.Name, EmojiReplacer.ReplaceEmojiTokens(line.Text), avatar));
             }
 
             return new DialogueDataModel(lines, avatarsByName);
