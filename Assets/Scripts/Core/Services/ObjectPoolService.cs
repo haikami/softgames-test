@@ -55,8 +55,11 @@ namespace Core.Services
 
         public void Return<T>(T instance) where T : Component
         {
+            if (instance == null) return;
+            
             (instance as IPoolable)?.OnReturned();
             instance.gameObject.SetActive(false);
+            instance.transform.SetParent(null);
             var type = typeof(T);
             if (!_pools.TryGetValue(type, out var queue))
             {
@@ -74,7 +77,11 @@ namespace Core.Services
             if (!_pools.TryGetValue(type, out var queue)) return;
 
             while (queue.Count > 0)
-                Object.Destroy(queue.Dequeue().gameObject);
+            {
+                var instance = queue.Dequeue();
+                if (instance == null ) continue;
+                Object.Destroy(instance.gameObject);
+            }
 
             _pools.Remove(type);
             _prefabByType.Remove(type);

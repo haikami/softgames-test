@@ -38,8 +38,6 @@ namespace Features.MagicWords.Controllers
             _network = ServiceLocator.Get<INetworkService>();
             _pool = ServiceLocator.Get<IObjectPoolService>();
             _loadingScreen = ServiceLocator.Get<ILoadingScreen>();
-            _lifecycleCts = new CancellationTokenSource();
-
             _retryButton.onClick.AddListener(() => RunFlow().Forget());
         }
 
@@ -64,13 +62,18 @@ namespace Features.MagicWords.Controllers
             //Cleanup and display loading screen while fetching dialogue data
             _errorPanel.SetActive(false);
             ClearPresentedLines();
+            _lifecycleCts = new CancellationTokenSource();
             _loadingScreen.Show(this);
 
             var sourceResult = await FetchDialogueData();
+            _loadingScreen.Hide(this);
+            _retryButton.enabled = false;
+            
             if (!sourceResult.IsSuccess)
             {
                 _loadingScreen.Hide(this);
                 ShowError(sourceResult.Error);
+                _retryButton.enabled = true;
                 return;
             }
 
@@ -81,7 +84,7 @@ namespace Features.MagicWords.Controllers
             //Give some seconds to load avatars
             await _avatarsLoader.LoadAllWithGrace(model.AvatarsByName, _config.AvatarGraceSeconds);
 
-            _loadingScreen.Hide(this);
+            _retryButton.enabled = true;
             //Start displaying dialogues
             await _dialogueDisplayer.DisplayDialogue(model.Lines, DisplayLine, _lifecycleCts.Token);
         }
@@ -120,17 +123,17 @@ namespace Features.MagicWords.Controllers
             foreach (var view in _activeLineViews)
                 _pool.Return(view);
             _activeLineViews.Clear();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_contentContainer);
+            _lifecycleCts?.Cancel();
         }
 
         private void OnDestroy()
         {
-            _lifecycleCts.Cancel();
-            _lifecycleCts.Dispose();
-
             _avatarsLoader?.CancelAll();
             _network?.CancelAll(nameof(MagicWordsController));
 
             ClearPresentedLines();
+            _lifecycleCts?.Dispose();
             _pool?.Clear<DialogueLineView>();
         }
     }

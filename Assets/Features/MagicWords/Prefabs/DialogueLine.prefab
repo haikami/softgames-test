@@ -58,15 +58,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.27358478, b: 0.27358478, a: 1}
+  m_Color: {r: 0.72955966, g: 0.72955966, b: 0.72955966, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 1436905438, guid: 40d5dc321f122c942bed1dc1d08d3701, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -140,8 +140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hello I am a person that speaks stuff to other people <sprite name="win">.
-    d
+  m_text: Hello I am a person that speaks stuff to other people <sprite name="win">
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -150,8 +149,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -168,15 +167,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.95
+  m_fontSize: 9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 9
-  m_fontSizeMax: 36
-  m_fontStyle: 0
+  m_fontSizeMax: 27.4
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -223,7 +222,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1538622621850976717}
   - component: {fileID: 8170074525448890921}
-  - component: {fileID: 3642505259791198217}
   - component: {fileID: 6358143295344478383}
   - component: {fileID: 3669174159852726465}
   - component: {fileID: 7844323808455786677}
@@ -263,36 +261,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7660410160024016716}
   m_CullTransparentMesh: 1
---- !u!114 &3642505259791198217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7660410160024016716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &6358143295344478383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,6 +278,9 @@ MonoBehaviour:
   _bubbleSlot: {fileID: 2986505216243262817}
   _avatarView: {fileID: 7349836307849738729}
   _textLabel: {fileID: 3274822583774057518}
+  _bubbleImage: {fileID: 5458398633586719140}
+  _leftDialogueBubbleColor: {r: 0.80784315, g: 0.80784315, b: 0.80784315, a: 1}
+  _rightDialogueBubbleColor: {r: 0.45769548, g: 0.7169812, b: 0.5254161, a: 1}
 --- !u!114 &3669174159852726465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,14 +476,6 @@ PrefabInstance:
     - target: {fileID: 7057214874179214739, guid: 59240c7174ce3c743aead609fff2e5c0, type: 3}
       propertyPath: m_Name
       value: AvatarSlot
-      objectReference: {fileID: 0}
-    - target: {fileID: 8783000268458258688, guid: 59240c7174ce3c743aead609fff2e5c0, type: 3}
-      propertyPath: m_fontSize
-      value: 13.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8783000268458258688, guid: 59240c7174ce3c743aead609fff2e5c0, type: 3}
-      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
-      value: 1801810542
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
