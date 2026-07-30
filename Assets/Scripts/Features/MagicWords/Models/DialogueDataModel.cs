@@ -12,5 +12,7 @@ namespace Features.MagicWords.Models
             Lines = lines;
             AvatarsByName = avatarsByName;
         }
+        
+        public bool HasDialogues => Lines.Count > 0;
     }
 }

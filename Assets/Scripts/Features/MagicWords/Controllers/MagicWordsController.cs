@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Core;
 using Core.Interfaces;
 using Core.Networking;
@@ -22,7 +23,8 @@ namespace Features.MagicWords.Controllers
         [SerializeField] private ScrollRect _scrollRect;
         [SerializeField] private GameObject _errorPanel;
         [SerializeField] private TMP_Text _errorLabel;
-        
+
+        private const float ErrorMessageDisplaySeconds = 3f;
         private bool _forceOverrideWithLocalConfigToggle;
 
         private INetworkService _network;
@@ -46,8 +48,9 @@ namespace Features.MagicWords.Controllers
         {
             if (ServiceLocator.Get<IFeatureMenuService>().CurrentFeature is not MagicWordsConfig config)
             {
-                Debug.LogError("Current feature is not setup properly: no MagicWordsConfig found.");
-                ServiceLocator.Get<IFeatureMenuService>().ReturnToMenu().Forget();
+                var message = "Current feature is not setup properly: no MagicWordsConfig found.";
+                Debug.LogError(message);
+                ShowErrorAndReturn(message).Forget();
                 return;
             }
 
@@ -99,27 +102,44 @@ namespace Features.MagicWords.Controllers
             ClearPresentedLines();
             _lifecycleCts = new CancellationTokenSource();
             _loadingScreen.Show(this);
-
-            var sourceResult = await FetchDialogueData();
-            _loadingScreen.Hide(this);
-            
-            if (!sourceResult.IsSuccess)
+            try
             {
+                //Fetch dialogue
+                var sourceResult = await FetchDialogueData();
+
+                if (!sourceResult.IsSuccess)
+                {
+                    throw new DialogueLoadingException(sourceResult.Error.Message);
+                }
+
+                //Map dialogue lines with avatars
+                var mapper = new DialogueDataMapper();
+                var model = mapper.Map(sourceResult.Value);
+
+                if (!model.HasDialogues)
+                {
+                    throw new DialogueLoadingException("No dialogue lines were returned.");
+                }
+
+                //Load all avatars and give a grace period before starting to show dialogues if some avatar hasn't loaded
+                await _avatarsLoader.LoadAllWithGrace(
+                    model.AvatarsByName,
+                    _config.AvatarGraceSeconds);
+
                 _loadingScreen.Hide(this);
-                ShowError(sourceResult.Error);
-                return;
+                _topBarView.SetButtonsVisibility(true, true, true);
+
+                //Start displaying dialogue
+                await _dialogueDisplayer.DisplayDialogue(
+                    model.Lines,
+                    DisplayLine,
+                    _lifecycleCts.Token);
             }
-
-            //Map and purge the data into more useful structure
-            var mapper = new DialogueDataMapper();
-            var model = mapper.Map(sourceResult.Value);
-
-            //Give some seconds to load avatars
-            await _avatarsLoader.LoadAllWithGrace(model.AvatarsByName, _config.AvatarGraceSeconds);
-
-            _topBarView.SetButtonsVisibility(true, true, true);
-            //Start displaying dialogues
-            await _dialogueDisplayer.DisplayDialogue(model.Lines, DisplayLine, _lifecycleCts.Token);
+            //If any exception happens during dialogue loading, display an error for several seconds
+            catch (DialogueLoadingException e)
+            {
+                ShowErrorAndReturn(e.Message).Forget();
+            }
         }
 
         private async UniTask<Result<IMagicWordsData>> FetchDialogueData()
@@ -158,11 +178,17 @@ namespace Features.MagicWords.Controllers
             _scrollRect.verticalNormalizedPosition = 0f;
         }
 
-        private void ShowError(NetworkError error)
+        private async UniTask ShowErrorAndReturn(string message)
         {
-            _errorLabel.text = error.Type == NetworkErrorType.Http
-                ? $"Server error: {error.Message}"
-                : "Couldn't load dialogue. Check your connection and try again.";
+            _loadingScreen.Hide(this);
+            ShowError($"Error: {message}\nGoing back to main menu in {ErrorMessageDisplaySeconds} seconds..");
+            await Task.Delay(TimeSpan.FromSeconds(ErrorMessageDisplaySeconds));
+            ServiceLocator.Get<IFeatureMenuService>().ReturnToMenu().Forget();
+        }
+
+        private void ShowError(string message)
+        {
+            _errorLabel.text = message;
             _errorPanel.SetActive(true);
         }
 
