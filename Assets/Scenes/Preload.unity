@@ -242,7 +242,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -393,6 +393,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 780104034}
     m_Modifications:
+    - target: {fileID: 6242863825938404621, guid: eef41fe0531b654478609dd3feb0397f, type: 3}
+      propertyPath: m_fontSize
+      value: 89.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242863825938404621, guid: eef41fe0531b654478609dd3feb0397f, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 6382937152848451531, guid: eef41fe0531b654478609dd3feb0397f, type: 3}
       propertyPath: m_Name
       value: LoadingView
@@ -514,6 +522,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1533133786781178902, guid: b84dd0df3fca5eb458ce7eec3db28d96, type: 3}
+      propertyPath: m_fontSize
+      value: 22.15
+      objectReference: {fileID: 0}
     - target: {fileID: 3478057426464994943, guid: b84dd0df3fca5eb458ce7eec3db28d96, type: 3}
       propertyPath: m_Name
       value: TopBar
@@ -622,6 +634,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5526926871204758277, guid: b84dd0df3fca5eb458ce7eec3db28d96, type: 3}
+      propertyPath: m_fontSize
+      value: 27.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855222370671396715, guid: b84dd0df3fca5eb458ce7eec3db28d96, type: 3}
+      propertyPath: m_fontSize
+      value: 22.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6985650650216350535, guid: b84dd0df3fca5eb458ce7eec3db28d96, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -679,6 +699,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8128834976696080340, guid: b84dd0df3fca5eb458ce7eec3db28d96, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128834976696080340, guid: b84dd0df3fca5eb458ce7eec3db28d96, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
@@ -689,6 +713,10 @@ PrefabInstance:
     - target: {fileID: 8128834976696080340, guid: b84dd0df3fca5eb458ce7eec3db28d96, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8389912391674619411, guid: b84dd0df3fca5eb458ce7eec3db28d96, type: 3}
+      propertyPath: m_fontSize
+      value: 18.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
