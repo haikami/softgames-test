@@ -1,4 +1,5 @@
-﻿using Core.Configs;
+﻿using System.Collections.Generic;
+using Core.Configs;
 using UnityEngine;
 
 namespace Features.PhoenixFlame.Configs
@@ -6,12 +7,12 @@ namespace Features.PhoenixFlame.Configs
     [CreateAssetMenu(menuName = "Features/PhoenixFlame/Config")]
     public class PhoenixFlameConfig : FeatureConfig
     {
-        [Header("Settings")]
-        [SerializeField] private bool _autoPlayOnEnter = true;
-        [Tooltip("Must match the Animator Controller's entry state name exactly.")]
-        [SerializeField] private string _initialColorStateName = "Fire_Orange";
+        [Header("Color Cycle")]
+        [Tooltip("Animator state names, in click order. Must match the Animator Controller exactly.")]
+        [SerializeField] private string[] _colorStateNames = { "Fire_Orange", "Fire_Green", "Fire_Blue" };
+        [SerializeField] private float _colorTransitionDuration = 1.2f;
 
-        public bool AutoPlayOnEnter => _autoPlayOnEnter;
-        public string InitialColorStateName => _initialColorStateName;
+        public IReadOnlyList<string> ColorStateNames => _colorStateNames;
+        public float ColorTransitionDuration => _colorTransitionDuration;
     }
 }

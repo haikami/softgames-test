@@ -35,3 +35,9 @@ Edge case handling:
 
 
 Emojis downloaded from https://github.com/jdecked/twemoji
+
+
+TODO: 
+- check all in web
+- add canvases to both deck stacks? 
+- subscribe to backbutton pressed instead of doing everything on destroy
