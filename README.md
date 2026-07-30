@@ -1,10 +1,14 @@
 
 
+For simplicity I have included some debug options inside each feature orchestrator instead of adding a debug
+
 ## Task 2: Magic words
+- features discarded but considered out of scope of the task: tap to skip to next dialogue, animate text/bubble/avatar when appearing, make scroll smoother
+
 
 
 - Emojis handling
-I mapped all the emojis in a spreadsheet so they match with the ids returned by the endpoint, this way we only need to replace {emojiID} in texts directly by the standard <sprite name="emojiID"> accepted by textmeshpro 
+I mapped all the emojis in a spritesheet so they match with the ids returned by the endpoint, this way we only need to replace {emojiID} in texts directly by the standard <sprite name="emojiID"> accepted by textmeshpro. For simplicity and performance I only picked the sprites I saw in the endpoint, for a full game I'd use as many emojis as needed. Made the emojis 25% bigger to highlight them in the dialogues
 
 
 "position" is interpreted as the position of the avatar in the dialogue.

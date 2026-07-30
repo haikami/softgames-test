@@ -59,7 +59,7 @@ namespace Core.Services
             
             (instance as IPoolable)?.OnReturned();
             instance.gameObject.SetActive(false);
-            instance.transform.SetParent(null);
+            instance.transform.SetParent(null, false);
             var type = typeof(T);
             if (!_pools.TryGetValue(type, out var queue))
             {
