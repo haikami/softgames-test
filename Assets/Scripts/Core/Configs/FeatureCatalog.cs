@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Core.Configs
 {
+    /// <summary>
+    /// Contains the list of available features.
+    /// </summary>
     [CreateAssetMenu(menuName = "Features/Feature Catalog")]
     public class FeatureCatalog : ScriptableObject, IFeatureCatalogService
     {

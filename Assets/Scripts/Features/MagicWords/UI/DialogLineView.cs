@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 namespace Features.MagicWords.UI
 {
+    /// <summary>
+    /// Displays a bubble speech and an avatar view, can have different setups depending
+    /// on the position of the avatar.
+    /// Can be pooled
+    /// </summary>
     public class DialogueLineView : MonoBehaviour, IPoolable
     {
         [Header("References")]

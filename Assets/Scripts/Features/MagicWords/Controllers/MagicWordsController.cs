@@ -16,6 +16,11 @@ using UnityEngine.UI;
 
 namespace Features.MagicWords.Controllers
 {
+    
+    /// <summary>
+    /// Coordinates the Magic Words feature by loading dialogue data, downloading
+    /// avatars, displaying the conversation, and managing possible errors.
+    /// </summary>
     public class MagicWordsController : MonoBehaviour
     {
         [SerializeField] private DialogueLineView _linePrefab;
@@ -44,6 +49,10 @@ namespace Features.MagicWords.Controllers
             SetupDebugButtons();
         }
 
+        /// <summary>
+        /// Validates the feature configuration, initializes dependencies, and starts
+        /// the dialogue loading flow.
+        /// </summary>
         private void Start()
         {
             if (ServiceLocator.Get<IFeatureMenuService>().CurrentFeature is not MagicWordsConfig config)
@@ -95,6 +104,10 @@ namespace Features.MagicWords.Controllers
             RunFlow().Forget();
         }
 
+        /// <summary>
+        /// Executes the complete dialogue flow: loads the dialogue data, downloads
+        /// avatars, displays the conversation, and handles any loading errors.
+        /// </summary>
         private async UniTaskVoid RunFlow()
         {
             //Cleanup and display loading screen while fetching dialogue data
@@ -169,6 +182,10 @@ namespace Features.MagicWords.Controllers
                 : Result<IMagicWordsData>.Failure(NetworkError.Unreachable("No fake data found in config, setup one first."));
         }
 
+        /// <summary>
+        /// Creates and displays a dialogue bubble, then scrolls the conversation to
+        /// the latest message.
+        /// </summary>
         private void DisplayLine(DialogueEntryModel line)
         {
             var view = _pool.Get<DialogueLineView>(parent: _contentContainer);
@@ -192,8 +209,11 @@ namespace Features.MagicWords.Controllers
             _errorPanel.SetActive(true);
         }
 
-        private void ClearPresentedLines()
-        {
+        /// <summary>
+        /// Returns all active dialogue views to the pool and cancels any ongoing
+        /// dialogue presentation.
+        /// </summary>
+        private void ClearPresentedLines()        {
             foreach (var view in _activeLineViews)
                 _pool.Return(view);
             _activeLineViews.Clear();

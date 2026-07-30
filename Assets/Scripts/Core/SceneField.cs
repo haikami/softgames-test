@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Core
 {
+    /// <summary>
+    /// Used to select a scene in the editor
+    /// </summary>
     [Serializable]
     public class SceneField
     {

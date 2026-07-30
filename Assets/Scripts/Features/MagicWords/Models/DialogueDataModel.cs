@@ -2,6 +2,9 @@
 
 namespace Features.MagicWords.Models
 {
+    /// <summary>
+    /// Holds the list of dialogue lines parsed into models, along with a lookup dictionary for avatar models.
+    /// </summary>
     public sealed class DialogueDataModel
     {
         public IReadOnlyList<DialogueEntryModel> Lines { get; }

@@ -1,5 +1,8 @@
 ﻿namespace Features.MagicWords.Models
 {
+    /// <summary>
+    /// Holds info of speaker name, formatted text and avatar model
+    /// </summary>
     public class DialogueEntryModel
     {
         public string SpeakerName { get; }

@@ -31,7 +31,6 @@ namespace Features.MagicWords.Controllers
         /// Skips avatars with the same name, holding info of first found in list
         /// Skips avatars without any dialogue line
         /// </summary>
-        /// <param name="data"></param>
         /// <returns>Dictionary of available avatars with their models</returns>
         private static Dictionary<string, AvatarModel> BuildAvatarDictionary(IMagicWordsData data)
         {

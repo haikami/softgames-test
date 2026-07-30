@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace Core.UI
 {
     /// <summary>
-    /// Changes menu buttons layout when aspect ratio gets past a threshold
+    /// Changes menu buttons layout when aspect ratio gets past a threshold to support landscape and portrait.
     /// </summary>
     public sealed class MenuButtonsLayoutHandler : MonoBehaviour
     {

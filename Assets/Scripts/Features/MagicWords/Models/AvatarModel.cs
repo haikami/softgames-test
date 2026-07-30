@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Features.MagicWords.Models
 {
+    /// <summary>
+    /// Model of an avatar that holds information of the current avatar state, its texture, and events
+    /// that are triggered to notify when its texture is set/failed. 
+    /// </summary>
     public class AvatarModel
     {
         public string Name { get; }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Editor
 {
+    /// <summary>
+    /// Used so we can select the scene for each feature in the editor
+    /// </summary>
     [CustomPropertyDrawer(typeof(SceneField))]
     public class SceneFieldPropertyDrawer : PropertyDrawer
     {

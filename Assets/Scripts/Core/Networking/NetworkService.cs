@@ -8,6 +8,11 @@ using UnityEngine;
 
 namespace Core.Networking
 {
+    /// <summary>
+    /// Provides networking functionality with support for retries, timeouts,
+    /// request cancellation, JSON deserialization, and texture downloads. Active requests
+    /// are tracked by owner, allowing related operations to be cancelled together.
+    /// </summary>
     public class NetworkService : INetworkService
     {
         private readonly IWebRequester _requester;
@@ -51,7 +56,7 @@ namespace Core.Networking
             if (!loaded)
             {
                 UnityEngine.Object.Destroy(texture);
-                return Result<Texture2D>.Failure(NetworkError.ParseFailure("Response was not a decodable image."));
+                return Result<Texture2D>.Failure(NetworkError.ParseFailure("Response was not an image."));
             }
 
             return Result<Texture2D>.Success(texture);

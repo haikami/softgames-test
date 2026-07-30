@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 
 namespace Features.MagicWords.Models
 {
+    /// <summary>
+    /// Expected response from provided endpoint
+    /// </summary>
     public class MagicWordsResponse : IMagicWordsData
     {
         [JsonProperty("dialogue")] public List<DialogueLine> Dialogue { get; set; }

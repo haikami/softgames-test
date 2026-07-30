@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 namespace Features.MagicWords.UI
 {
+    /// <summary>
+    /// Displays the possible states of an avatar (Ready, not setup/failed, pending),
+    /// along with his name.
+    /// </summary>
     public class AvatarView : MonoBehaviour
     {
         [Header("References")]

@@ -9,6 +9,11 @@ using UnityEngine;
 
 namespace Features.AceOfShadows.Controllers
 {
+    /// <summary>
+    /// Coordinates the Ace of Shadows feature by initializing the card stacks,
+    /// driving the card transfer sequence, handling UI interactions, and managing
+    /// reset and cheat functionality.
+    /// </summary>
     public class AceOfShadowsController : MonoBehaviour
     {
         [SerializeField] private CardView _cardPrefab;
@@ -65,6 +70,10 @@ namespace Features.AceOfShadows.Controllers
             _topBarView?.SetupCheatButton(FasterCheatMessage, GoFasterCheatClicked);
         }
 
+        /// <summary>
+        /// Creates the source and destination stacks, initializes the card pool,
+        /// and prepares the sequence controller.
+        /// </summary>
         private void SetupStacks()
         {
             _pool = ServiceLocator.Get<IObjectPoolService>();
@@ -85,6 +94,10 @@ namespace Features.AceOfShadows.Controllers
 
         private void ShowSequenceCompleteView() => _sequenceCompleteView?.SetActive(true);
 
+        /// <summary>
+        /// Advances the card sequence at the configured interval until all cards
+        /// have been transferred.
+        /// </summary>
         private void Update()
         {
             if (_stacksSwitcher == null || _stacksSwitcher.IsComplete) return;

@@ -5,6 +5,9 @@ using Cysharp.Threading.Tasks;
 
 namespace Core.Services
 {
+    /// <summary>
+    /// Navigation service that allows going back and forth from each feature.
+    /// </summary>
     public class FeatureMenuService : IFeatureMenuService
     {
         private readonly ISceneLoaderService _sceneLoader;

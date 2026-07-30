@@ -1,14 +1,16 @@
 ﻿using Core.Interfaces;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Features.AceOfShadows.UI
 {
+
+    /// <summary>
+    /// Main component of the card view, owns card rect transform.
+    /// </summary>
     [RequireComponent(typeof(RectTransform))]
     public class CardView : MonoBehaviour, IPoolable
     {
         [SerializeField] private RectTransform _rect;
-        [SerializeField] private Image _image;
 
         public RectTransform Rect => _rect;
 

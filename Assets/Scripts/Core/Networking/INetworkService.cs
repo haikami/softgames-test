@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Core.Networking
 {
     /// <summary>
-    /// Basic methods needed for this task
+    /// Network service interface containing basic methods needed for this specific test
     /// </summary>
     public interface INetworkService
     {

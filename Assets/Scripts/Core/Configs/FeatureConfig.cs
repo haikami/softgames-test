@@ -2,6 +2,9 @@
 
 namespace Core.Configs
 {
+    /// <summary>
+    /// Base config for all features. Extend to add more parameters.
+    /// </summary>
     [CreateAssetMenu(menuName = "Features/Generic Config")]
     public class FeatureConfig : ScriptableObject
     {

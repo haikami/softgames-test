@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Features.AceOfShadows.Animations
 {
+    /// <summary>
+    /// Moves from a to b using an arc of desired height
+    /// </summary>
     public class ArcMoveAnimator : ICardMoveAnimator
     {
         public void Play(CardView card, Vector2 target, CardMoveAnimationPreset preset, Action onComplete)

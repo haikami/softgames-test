@@ -3,6 +3,10 @@ using Features.MagicWords.Interfaces;
 using Features.MagicWords.Models;
 using UnityEngine;
 
+/// <summary>
+/// Used for creating fake dialogs
+/// and assigning them avatars for testing.
+/// </summary>
 [CreateAssetMenu(menuName = "Features/MagicWords/Local Source Config")]
 public class MagicWordsLocalConfig : ScriptableObject, IMagicWordsData
 {

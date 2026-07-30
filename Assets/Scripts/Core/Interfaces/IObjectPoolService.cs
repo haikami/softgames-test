@@ -2,6 +2,9 @@
 
 namespace Core.Interfaces
 {
+    /// <summary>
+    /// Interface for a simple pool service that can register one prefab per class
+    /// </summary>
     public interface IObjectPoolService
     {
         void Register<T>(T prefab, int prewarmCount = 0) where T : Component;

@@ -2,6 +2,9 @@
 
 namespace Core.Interfaces
 {
+    /// <summary>
+    /// Interface for a service that asynchronously loads and unloads scenes.
+    /// </summary>
     public interface ISceneLoaderService
     {
         UniTask LoadAdditive(string sceneName);

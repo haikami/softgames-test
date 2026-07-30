@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace Core
 {
+    /// <summary>
+    /// Initializes relevant services and prefabs, then navigates to main menu
+    /// </summary>
     public class PreloadBootstrapper : MonoBehaviour
     {
         [SerializeField] private FeatureCatalog _featureCatalog;

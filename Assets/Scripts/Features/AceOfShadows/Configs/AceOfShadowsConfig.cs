@@ -11,7 +11,9 @@ namespace Features.AceOfShadows.Configs
         [Header("Additional Settings")]
         [SerializeField] private float _moveInterval = 1f;
         [SerializeField] private int _totalCardCount = 144;
-        [Tooltip("vertical offset between cards in the stack")][SerializeField] private float _cardStackOffset = 2f;
+        
+        [Tooltip("vertical offset between cards in the stack")]
+        [SerializeField] private float _cardStackOffset = 2f;
         [SerializeField] private List<CardMoveAnimationPreset> _cardMovePresets;
 
         public int TotalCardCount => _totalCardCount;

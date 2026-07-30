@@ -18,13 +18,11 @@ namespace Core.UI
         //Only one cheat button per feature allowed, purely for the sake of simplicity
         [SerializeField] private ButtonWithText _cheatButton;
         
-        public event Action OnBackButtonPressed;
         public event Action OnResetButtonPressed;
         
         private void Awake()
         {
             _resetButton.onClick.AddListener(() => OnResetButtonPressed?.Invoke());
-            _backButton.onClick.AddListener(() => OnBackButtonPressed?.Invoke());
         }
 
         public void SetButtonsVisibility(bool backButtonVisible = false, bool resetButtonVisible = false, bool cheatButtonVisible = false)

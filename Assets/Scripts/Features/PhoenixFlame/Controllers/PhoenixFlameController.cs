@@ -6,12 +6,18 @@ using UnityEngine;
 
 namespace Features.PhoenixFlame.Controllers
 {
+    /// <summary>
+    /// Coordinates the Phoenix Flame feature by initializing services,
+    /// and setting up top bar view to iterate over the different states of the flameController
+    /// </summary>
     public class PhoenixFlameController : MonoBehaviour
     {
         [SerializeField] private FlameController _flameController;
 
         private ITopBarView _topBarView;
         private PhoenixFlameConfig _config;
+        
+        private string NextColorButtonLabel => $"To {_flameController.NextColorState.Replace("Fire_","")}";
 
         private void Awake()
         {
@@ -45,12 +51,10 @@ namespace Features.PhoenixFlame.Controllers
         private void AdvanceColor()
         {
             _flameController.AdvanceColor();
-            // refresh label to show the new "next" preview
+            // refresh label to show next color
             _topBarView.SetupCheatButton(NextColorButtonLabel, AdvanceColor); 
         }
-
-        private string NextColorButtonLabel => $"To {_flameController.NextColorState.Replace("Fire_","")}";
-
+        
         private void Reset()
         {
             if (_config == null) return;
@@ -59,7 +63,7 @@ namespace Features.PhoenixFlame.Controllers
             _topBarView.SetupCheatButton(NextColorButtonLabel, AdvanceColor);
         }
 
-        private void ReturnToMenu() => ServiceLocator.Get<IFeatureMenuService>().ReturnToMenu().Forget();
+        private static void ReturnToMenu() => ServiceLocator.Get<IFeatureMenuService>().ReturnToMenu().Forget();
 
         private void OnDestroy()
         {

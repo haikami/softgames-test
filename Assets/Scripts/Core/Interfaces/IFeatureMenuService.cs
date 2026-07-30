@@ -4,6 +4,9 @@ using Cysharp.Threading.Tasks;
 
 namespace Core.Interfaces
 {
+    /// <summary>
+    /// Interface for menu. Used for navigating through features.
+    /// </summary>
     public interface IFeatureMenuService
     {
         FeatureConfig CurrentFeature { get; }

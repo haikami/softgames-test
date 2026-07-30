@@ -6,7 +6,7 @@ namespace Core.UI
     /// <summary>
     /// Displays relevant frame metrics.
     /// Used one single text field for simplicity.
-    /// Also, this component will always be displayed so fo this test there is no logic to show/hide
+    /// Also, this component will always be displayed so for this test there is no logic to show/hide
     /// </summary>
     public class FpsCounterView : MonoBehaviour
     {

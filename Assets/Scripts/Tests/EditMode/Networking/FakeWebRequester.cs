@@ -38,7 +38,7 @@ namespace Core.Tests.EditMode.Networking
                 var tcs = _pendingCompletion;
                 _pendingCompletion = null;
 
-                using var registration = token.Register(() => tcs.TrySetCanceled());
+                await using var registration = token.Register(() => tcs.TrySetCanceled());
                 try
                 {
                     return await tcs.Task;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Features.PhoenixFlame.Controllers
@@ -19,7 +18,6 @@ namespace Features.PhoenixFlame.Controllers
         public string CurrentColorState => _colorStateNames[_currentColorIndex];
         public string NextColorState => _colorStateNames[NextIndex()];
 
-        public event Action<string> OnColorChanged;
 
         private void Awake()
         {
@@ -40,11 +38,15 @@ namespace Features.PhoenixFlame.Controllers
             SnapToColor(0);
         }
 
+        /// <summary>
+        /// Uses animator CrossFade method to smoothly move
+        /// from current state to the next
+        /// _transitionDuration is taken from config
+        /// </summary>
         public void AdvanceColor()
         {
             _currentColorIndex = NextIndex();
             _flameAnimator.CrossFade(CurrentColorState, _transitionDuration);
-            OnColorChanged?.Invoke(CurrentColorState);
         }
 
         public void ResetFlame()
@@ -60,7 +62,6 @@ namespace Features.PhoenixFlame.Controllers
         {
             _currentColorIndex = index;
             _flameAnimator.Play(_colorStateNames[index], layer: 0, normalizedTime: 0f);
-            OnColorChanged?.Invoke(CurrentColorState);
         }
 
         private void PlayAllParticles()
@@ -74,7 +75,10 @@ namespace Features.PhoenixFlame.Controllers
                 ps.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
 
-        
+        /// <summary>
+        /// Check in case color states dont match with the ones from animator
+        /// </summary>
+        /// <returns></returns>
         private bool ValidateColorStates()
         {
             var allValid = true;

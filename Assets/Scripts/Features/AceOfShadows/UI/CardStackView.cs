@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Features.AceOfShadows.UI
 {
+    /// <summary>
+    /// Displays the amount of cards of a stack listening
+    /// to the events of the stack controller
+    /// </summary>
     public class CardStackView : MonoBehaviour
     {
         [SerializeField] private RectTransform _content;

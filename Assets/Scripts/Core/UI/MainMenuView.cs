@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Core.UI
 {
+    /// <summary>
+    /// Adds buttons for each feature, hides/shows itself and top bar when entering/exiting features.
+    /// </summary>
     public class MainMenuView : MonoBehaviour
     {
         [SerializeField] private Transform _buttonContainer;
