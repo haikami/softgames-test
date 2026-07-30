@@ -68,15 +68,9 @@ I also included a small unit test suite covering two Core systems:
 
 ---
 
-## UI
+## Aspect ratio
 
-The UI was built to behave reasonably across different aspect ratios rather than being tuned for a single target resolution.
-
----
-
-## Comments
-
-Comments were added only where I felt they genuinely improve readability—primarily around more complex classes, interfaces, and methods—instead of commenting every line.
+The UI was built to behave reasonably across different aspect ratios (both portrait and landscape) rather than being tuned for a single target resolution.
 
 ---
 
@@ -88,7 +82,7 @@ The Core assembly contains shared systems such as:
 - Scene loading
 - Object pooling
 - Networking
-- Other reusable infrastructure
+- Other reusable logic and assets
 
 ---
 
@@ -117,7 +111,7 @@ Each feature follows the same overall structure:
 
 After finishing all three tasks I noticed they share a fair amount of structure (reset flow, cleanup pattern, config resolution during startup).
 
-I intentionally chose **not** to abstract those into a shared base class. At this project's size, I felt the extra abstraction would add complexity without providing much value, and I'd rather be upfront about that tradeoff than introduce architecture that wasn't truly justified.
+I intentionally chose **not** to abstract those into a shared base class to avoid complexity without providing much value.
 
 ---
 
